@@ -18,13 +18,12 @@ def find_door(mask):
     else:
         return 0, 0, 0, 0
     
-def predict(model, images):
+def predict(model, images, device):
     """
     Returen
     ----------
     pred: 255 for door type: uint8
     """
-    device = 'cuda' if torch.cuda.is_available() else torch.device('cpu')
     size_ori = []
     images_trans = []
     for image in images:
@@ -48,19 +47,28 @@ def predict(model, images):
 
     
 if __name__ == '__main__':
+    import argparse
     from pathlib import Path
     from Dataset import read_img_mask
     from matplotlib import pyplot as plt
     import matplotlib.patches as patches
+    
+    parser = argparse.ArgumentParser()
+    parser.add_argument('device', type=str, help='{"cpu", "cuda"}')
+    args = parser.parse_args()
+    
     # model = load_model('models/unet/2024-03-10-01-55-52/107_0.015661_0.9188_0.0734_0.6793.pt')
     # model = load_model('models/unet/2024-03-10-01-55-52/405_0.014373_0.9156_0.5066_0.6576.pt')
-    model = torch.jit.load("weights/best.pt")
+    if args.device == "cpu":
+        model = torch.jit.load("weights/best_cpu.pt")
+    else:
+        model = torch.jit.load("weights/best_cuda.pt")
 
     img_fps_valid = sorted(glob.glob(os.path.join('DataDoorDirectionLabeled', 'valid', 'images' , "*.jpg")))
     txt_fps_valid = sorted(glob.glob(os.path.join('DataDoorDirectionLabeled', 'valid', 'labels' , "*.txt")))
     
     image = cv2.cvtColor(cv2.imread(img_fps_valid[0]), cv2.COLOR_BGR2GRAY)
-    mask_preds, box_preds = predict(model, [image])
+    mask_preds, box_preds = predict(model, [image], device=args.device)
     mask_pred, box_pred = mask_preds[0], box_preds[0]
     
     x1, y1, x2, y2 = box_pred

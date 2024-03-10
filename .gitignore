@@ -13,3 +13,5 @@ models
 weights
 DataFloorPlans500
 __pycache__
+AccessControlPlanForFloorPlan
+AccessControlPlanForFloorPlan.tar.gz

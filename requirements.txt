@@ -1,0 +1,10 @@
+albumentations
+numpy
+pandas
+ultralytics
+matplotlib
+torch
+torchaudio
+torchvision
+torchsummary
+opencv-python
