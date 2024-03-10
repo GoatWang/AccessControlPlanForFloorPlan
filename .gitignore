@@ -1,0 +1,15 @@
+temp
+data
+wandb
+runs
+*.log
+*.pt
+ROBIN
+DataDoorDirection
+.ipynb_checkpoints
+__MACOSX
+DataDoorDirectionLabeled
+models
+weights
+DataFloorPlans500
+__pycache__
