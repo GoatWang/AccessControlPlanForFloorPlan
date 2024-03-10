@@ -8,12 +8,12 @@ Please download it from the [google drive](https://drive.google.com/file/d/1_1-U
     - Sink Recognized as Door:![](static/figures_test_1st/Cat47_5.png)
     - Door not Recognized:![](static/figures_test_1st/Cat49_1.png)
     
-2. Use frist objection model to do the labeling with manual adjustment and train the second model based on our data format: [ROBIN](https://github.com/gesstalt/ROBIN). The manual adjusted data is at [google drive](https://drive.google.com/file/d/1hs6Qc2UjLSYC5Q9rDbENUcZDAgnrkf5y/view?usp=sharing), which can be put on the `FloorPlan/ROBIN/ROBIN_Door_15_Labeled`. The following images show the improvements of the 2nd model from the first model. [Yolov8](https://github.com/ultralytics/ultralytics) is used in this task.
+2. Use frist object detection model to do the labeling with some manual adjustment and train the second model based on our target dataset ([ROBIN](https://github.com/gesstalt/ROBIN)). The manual adjusted data is at [google drive](https://drive.google.com/file/d/1hs6Qc2UjLSYC5Q9rDbENUcZDAgnrkf5y/view?usp=sharing), which can be put on the `FloorPlan/ROBIN/ROBIN_Door_15_Labeled`. The following images show the improvements of the 2nd model from the first model. [Yolov8](https://github.com/ultralytics/ultralytics) is used in this task.
     - (Fixed) Table Recognized as Door:![](static/figures_test_2nd/Cat35_7.png)
     - (Fixed) Sink Recognized as Door:![](static/figures_test_2nd/Cat47_5.png)
     - (Fixed) Door not Recognized:![](static/figures_test_2nd/Cat49_1.png)
 
-3. Use Traditional CV method to help Annotation the location of the door
+3. Use traditional CV methods to help annotation the location of doors. The following images show some success and fail annotation caes. After the CV methods annotation, some manual adjustments are required to ensure the correctness of the label, which will be furher used to train the segmentation model.
     - Normal: 
         - ![](static/figures_orientationcv/Cat2_1_00_hc_detect.png)
         - ![](static/figures_orientationcv/Cat2_1_00_wall_loc.png)       
@@ -28,7 +28,7 @@ Please download it from the [google drive](https://drive.google.com/file/d/1_1-U
     - Fail Case4 (Fail to Find Orientation):
         - ![](static/figures_orientationcv/Cat30_4_00_hc_detect.png)       
         
-4. Train the segmentation model to recognize the orientation of the door. The labeled dataset can be found at [google drive](https://drive.google.com/file/d/19rZ_CDH-WnGSQ_RE2iyY9PHb90tbEU1N/view?usp=sharing). The training code can be found in `FloorPlan/DoorOrientationSegmentation`. The UNet architecture is used in this task.
+4. Train the segmentation model to recognize the orientation of the door. The labeled dataset can be found at [google drive](https://drive.google.com/file/d/19rZ_CDH-WnGSQ_RE2iyY9PHb90tbEU1N/view?usp=sharing). The training code can be found in `FloorPlan/DoorOrientationSegmentation`. The self-built UNet architecture as well as whole PyTorch training pipeline are used in this task. The following figures show the some processes in this training pipeline.
     - Labeled Data: 
         - ![](static/Segmentation/DatasetPreviewDsiffSample.png)   
     - Augmentation: This techniques are used to enhance the generalizability of the model.
@@ -36,7 +36,7 @@ Please download it from the [google drive](https://drive.google.com/file/d/1_1-U
     - Model Prediction: The Red is the predicted location of the door. The blue is the labeled location of the door. Since they are almost overlapped, the blue lines are usually not visible.
         - ![](static/Segmentation/Evaluation.png)
     
-5. Local Camera and Card Reader Location.
+5. Locate Camera and Card Reader from the door location and its orientation.
     - Prediction1: ![](static/final_predictions/Cat20_3.jpg)
     - Prediction2: ![](static/final_predictions/Cat21_2.jpg)
 
