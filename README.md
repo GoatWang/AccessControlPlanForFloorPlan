@@ -1,8 +1,8 @@
 # Access Control Plan for FloorPlan 
 ## Application
-You can use the python application to test the function. Please download it from the [google drive](https://drive.google.com/file/d/1_1-UIt8joyS_FvTtRm-VquuRjBkGcPRv/view?usp=sharing) to test your own floorplan images.
+Please download it from the [google drive](https://drive.google.com/file/d/1_1-UIt8joyS_FvTtRm-VquuRjBkGcPRv/view?usp=sharing) to test your own floorplan images.
 
-## Process
+## Processes
 1. Use [DataFloorPlans500](https://universe.roboflow.com/university-y9nbi/floor-plans-500/dataset/3) to train the first object recognition model. Since the data is not fully suitable on our usecase. This model is just for labeling our own data. The following images show some fail cases of this model on our dataset (ROBIN). [Yolov8](https://github.com/ultralytics/ultralytics) is used in this task.
     - Table Recognized as Door:![](static/figures_test_1st/Cat35_7.png)
     - Sink Recognized as Door:![](static/figures_test_1st/Cat47_5.png)
